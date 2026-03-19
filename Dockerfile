@@ -1,14 +1,14 @@
+FROM maven:3.9.9-eclipse-temurin-21 AS build
+
+WORKDIR /app
+COPY . .
+
+# build jar using maven (no mvnw)
+RUN mvn clean package -DskipTests
+
 FROM eclipse-temurin:21-jdk
 
 WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 
-COPY . .
-
-# fix permission issue
-RUN chmod +x mvnw
-
-# build jar
-RUN ./mvnw clean package -DskipTests
-
-# run app
-CMD ["java", "-jar", "target/*.jar"]
+CMD ["java", "-jar", "app.jar"]/*.jar"]
