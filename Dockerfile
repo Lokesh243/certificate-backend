@@ -3,7 +3,6 @@ FROM maven:3.9.9-eclipse-temurin-21 AS build
 WORKDIR /app
 COPY . .
 
-# build jar using maven (no mvnw)
 RUN mvn clean package -DskipTests
 
 FROM eclipse-temurin:21-jdk
@@ -11,4 +10,4 @@ FROM eclipse-temurin:21-jdk
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
-CMD ["java", "-jar", "app.jar"]/*.jar"]
+CMD ["sh", "-c", "java -jar app.jar"]
