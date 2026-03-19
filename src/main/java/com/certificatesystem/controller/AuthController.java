@@ -18,7 +18,7 @@ public class AuthController {
     @PostMapping("/register")
     public User register(@RequestBody User user) {
         return userRepository.save(user);
-    }
+    }//register method
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
