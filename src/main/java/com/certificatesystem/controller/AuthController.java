@@ -15,6 +15,10 @@ public class AuthController {
 
     @Autowired
     private UserRepository userRepository;
+    @PostMapping("/register")
+    public User register(@RequestBody User user) {
+        return userRepository.save(user);
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
@@ -25,7 +29,7 @@ public class AuthController {
         );
 
         if (existingUser != null) {
-           
+
             return ResponseEntity.ok(existingUser);
         } else {
 
