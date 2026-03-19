@@ -4,6 +4,8 @@ import com.certificatesystem.entity.User;
 import com.certificatesystem.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,7 +17,7 @@ public class AuthController {
     private UserRepository userRepository;
 
     @PostMapping("/login")
-    public User login(@RequestBody User user) {
+    public ResponseEntity<?> login(@RequestBody User user) {
 
         User existingUser = userRepository.findByUsernameAndPassword(
                 user.getUsername(),
@@ -23,9 +25,13 @@ public class AuthController {
         );
 
         if (existingUser != null) {
-            return existingUser;   // ✅ IMPORTANT (returns role also)
-        }
+           
+            return ResponseEntity.ok(existingUser);
+        } else {
 
-        return null;
+            return ResponseEntity
+                    .status(HttpStatus.UNAUTHORIZED)
+                    .body("Invalid credentials");
+        }
     }
 }
