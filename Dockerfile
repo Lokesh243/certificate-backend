@@ -10,4 +10,4 @@ FROM eclipse-temurin:21-jdk
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
 
-CMD ["sh", "-c", "java -jar app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
