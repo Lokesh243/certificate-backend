@@ -1,7 +1,10 @@
 package com.certificatesystem.repository;
 
-import com.certificatesystem.entity.CertificateRequest;
 import org.springframework.data.jpa.repository.JpaRepository;
+import com.certificatesystem.entity.CertificateRequest;
+
+import java.util.List;
 
 public interface RequestRepository extends JpaRepository<CertificateRequest, Long> {
+    List<CertificateRequest> findByUsername(String username);
 }
