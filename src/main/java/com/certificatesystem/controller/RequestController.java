@@ -17,7 +17,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 @RestController
 @RequestMapping("/request")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class RequestController {
 
     @Autowired
